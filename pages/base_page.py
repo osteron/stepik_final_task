@@ -1,11 +1,10 @@
 import math
-
-import pytest
 from selenium.common import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException, TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
+
 
 class BasePage:
 
@@ -17,6 +16,13 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
+    def go_to_basket_page(self):
+        try:
+            basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+            basket_link.click()
+        except NoSuchElementException:
+            print('Basket button is not presented')
+
     def go_to_login_page(self):
         try:
             login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
@@ -24,6 +30,10 @@ class BasePage:
             self.should_be_login_url()
         except NoSuchElementException:
             print('Login button is not presented')
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
 
     def should_be_login_url(self):
         current_url = self.browser.current_url
