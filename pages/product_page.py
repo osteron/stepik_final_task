@@ -3,6 +3,14 @@ from .locators import ProductPageLocators
 
 
 class ProductPage(BasePage):
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ALERT_ADDED_TO_BASKET), \
+            "Success message is presented, but should not be"
+
+    def should_be_disappeared_of_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.ALERT_ADDED_TO_BASKET), \
+            "Success message is not disappeared"
+
     def add_book_to_basket(self):
         self.browser.find_element(*ProductPageLocators.BUTTON_ADD_TO_BASKET).click()
 

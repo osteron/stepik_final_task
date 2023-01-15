@@ -18,7 +18,7 @@ class LoginPageLocators:
 
 class ProductPageLocators:
     BUTTON_ADD_TO_BASKET = (By.CLASS_NAME, 'btn-add-to-basket')
-    ALERT_ADDED_TO_BASKET = (By.CLASS_NAME, 'alert-success')
+    ALERT_ADDED_TO_BASKET = (By.CSS_SELECTOR, '#messages > .alert')
     ALERT_BOOK_TITLE = (By.CSS_SELECTOR, '.alertinner > strong')
     BOOK_PRICE = (By.CSS_SELECTOR, '.product_main > .price_color')
     BOOK_TITLE = (By.CSS_SELECTOR, '.product_main > h1')
