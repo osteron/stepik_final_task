@@ -20,9 +20,14 @@ class BasePage:
     def go_to_login_page(self):
         try:
             login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+            login_link.click()
+            self.should_be_login_url()
         except NoSuchElementException:
             print('Login button is not presented')
-        login_link.click()
+
+    def should_be_login_url(self):
+        current_url = self.browser.current_url
+        assert 'login' in current_url, f'Current url {current_url} is not login url'
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login link is not presented'
