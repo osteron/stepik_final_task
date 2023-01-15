@@ -1,9 +1,20 @@
 from .pages.product_page import ProductPage
+import pytest
 
-link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+URL = 'http://selenium1py.pythonanywhere.com/zh-cn/catalogue/coders-at-work_207/'
 
 
-def test_guest_can_add_product_to_basket(browser):
+@pytest.mark.parametrize('link', [f"{URL}?promo=offer0",
+                                  f"{URL}?promo=offer1",
+                                  f"{URL}?promo=offer2",
+                                  f"{URL}?promo=offer3",
+                                  f"{URL}?promo=offer4",
+                                  f"{URL}?promo=offer5",
+                                  f"{URL}?promo=offer6",
+                                  pytest.param(f"{URL}?promo=offer7", marks=pytest.mark.xfail),
+                                  f"{URL}?promo=offer8",
+                                  f"{URL}?promo=offer9"])
+def test_guest_can_add_product_to_basket(browser, link):
     page = ProductPage(browser, link)
     page.open()
     page.add_book_to_basket()
