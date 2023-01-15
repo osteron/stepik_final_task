@@ -36,11 +36,13 @@ def browser(request):
         print('\nstart chrome browser fot test..')
         options = webdriver.chrome.options.Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+        options.add_argument("--incognito")
         browser = webdriver.Chrome(options=options)
     elif browser_name.lower() == 'firefox':
         print('\nstart firefox browser for test..')
         options = webdriver.firefox.options.Options()
         options.set_preference("intl.accept_languages", user_language)
+        options.add_argument("--private")
         browser = webdriver.Firefox(options=options)
     else:
         raise pytest.UsageError(f'--browser_name should be {browsers}')
