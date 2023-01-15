@@ -1,3 +1,4 @@
+"""Base page for POM"""
 import math
 from selenium.common import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException, TimeoutException
